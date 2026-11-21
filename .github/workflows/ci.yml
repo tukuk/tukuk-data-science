@@ -1,10 +1,30 @@
-name: Tukuk Data Science CI
+name: CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
-  test:
+  analyse:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: echo "Data science validated."
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Syntax check
+        run: node --check index.js && echo "✅ index.js OK"
+
+      - name: Run analysis (dry run)
+        run: node index.js
+
+      - name: Validate scripts
+        run: |
+          for f in scripts/*.js; do
+            [ -f "$f" ] && node --check "$f" && echo "✅ $f OK"
+          done || true

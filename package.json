@@ -1,16 +1,19 @@
 {
   "name": "tukuk-data-science",
   "version": "1.0.0",
-  "description": "Tukuk-OS Data Science — data analysis and modeling",
+  "description": "Tukuk-OS Data Science — data analysis, statistical modeling, and reporting",
   "main": "index.js",
   "scripts": {
-    "lint": "echo \"Data science lint placeholder\" && exit 0",
-    "test": "echo \"Data science validated\" && exit 0"
+    "start": "node index.js",
+    "report": "node index.js --report",
+    "test": "node --check index.js && echo 'Data science OK'",
+    "lint": "node --check scripts/*.js 2>/dev/null && echo 'Scripts OK' || echo 'No scripts to check'"
   },
   "repository": {
     "type": "git",
     "url": "git@github.com:tukuk/tukuk-data-science.git"
   },
+  "keywords": ["data-science", "statistics", "tukuk", "analytics"],
   "author": "Tukuk",
   "license": "ISC",
   "private": true
